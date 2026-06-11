@@ -47,6 +47,7 @@ while running:
                 i -= 4
                 j +=1
                 break
+                
     pygame.display.flip()
     clock.tick(60) 
 pygame.quit()
