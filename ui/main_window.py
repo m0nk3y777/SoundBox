@@ -14,7 +14,7 @@ def showMenu(screen,mouse,nb_buttons) :
     SPACEY = 0
 
     for i in range (0,nb_buttons) :
-        soundBtn = pygame.draw.rect(screen, ORANGE, (X1+SPACEX , Y1 ,80 ,80),border_radius = 35)
+        soundBtn = pygame.draw.rect(screen, ORANGE, (X1+SPACEX , Y1+SPACEY ,80 ,80),border_radius = 35)
         fontBtn = pygame.font.SysFont("book antiqua", 12, bold=True)
         textSound = fontBtn.render("Sound",1,WHITE)
         textSoundPos = textSound.get_rect()
@@ -22,16 +22,15 @@ def showMenu(screen,mouse,nb_buttons) :
         screen.blit(textSound,textSoundPos)
         
         if soundBtn.collidepoint(mouse) :
-            playBtn = pygame.draw.rect(screen, GREEN, (X1+SPACEX ,Y1 ,80 ,80),border_radius = 35)
-            playBtnBorder = pygame.draw.rect(screen, BLUE,  (X1+SPACEX ,Y1 ,80 ,80),border_radius = 35, width = 2)
+            playBtn = pygame.draw.rect(screen, GREEN, (X1+SPACEX ,Y1+SPACEY ,80 ,80),border_radius = 35)
+            playBtnBorder = pygame.draw.rect(screen, BLUE,  (X1+SPACEX ,Y1+SPACEY ,80 ,80),border_radius = 35, width = 2)
             screen.blit(textSound,textSoundPos)
         SPACEX += LARGEUR/5
 
-        if nb_buttons == 5 :
+        if (i+1) % (NB_COLS) == 0 :
             SPACEX = 0
-            Y1 = HAUTEUR/6 + 100
-            nb_buttons = 0
-            return nb_buttons
+            SPACEY += 100            
+    
 
     pygame.display.flip()
     
@@ -50,7 +49,7 @@ def addSound(screen,mouse,nb_buttons) :
     if soundAddBtn.collidepoint(mouse) :
             soundAddBtnBorder = pygame.draw.rect(screen, BLUE,  ((LARGEUR-100 ) ,(HAUTEUR-100) ,40 ,40),border_radius = 20, width= 2)
             screen.blit(text, textpos)
-            if click[0] == True and nb_buttons < 4 :
+            if click[0] == True and nb_buttons < 20 :
                 nb_buttons += 1
                 print (nb_buttons)
                 return nb_buttons
