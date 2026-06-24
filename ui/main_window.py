@@ -1,53 +1,20 @@
 import pygame
+from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,COLORS
 
 
-screen_width = 1280
-screen_height = 720
 
-pygame.init()
-screen = pygame.display.set_mode((screen_width, screen_height))
-clock = pygame.time.Clock()
-running = True
+def showMenu(screen) : 
+    font = pygame.font.SysFont("book antiqua",48)
+    text = font.render("S0undB0x Project V0.1", 1,WHITE)
+    textpos = text.get_rect()
+    textpos = textpos.center
+    screen.blit(text, textpos)
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    soundBtn = pygame.draw.rect(screen, ORANGE, (LARGEUR/6 ,HAUTEUR/6 ,80,80),border_radius = 35)
+    fontBtn = pygame.font.SysFont("book antiqua", 12, bold=True)
+    textSound = fontBtn.render("Sound",1,WHITE)
+    textSoundPos = textSound.get_rect()
+    textSoundPos.center = soundBtn.center
+    screen.blit(textSound,textSoundPos)
 
-    screen.fill("gray")
-
-    myfont = pygame.font.SysFont("monospace", 24)
-    label = myfont.render("SoundBox", 1, (0,0,0))
-    label2 = myfont.render("- By Tar0saku & M0nkey", 1, (0,0,0))
-    
-    posX = 100
-    posY = 200
-    space_row = 150
-    nb_btn = 20
-    nb_lignes = 3
-    j= 0
-
-    red = (200,20,30)
-    black = (0,0,0)
-    
-    label_rect = label.get_rect(center=(screen_width/2, 50))
-    label2_rect = label.get_rect(center=((screen_width/2) - 150 , 100))
-    screen.blit(label, label_rect)
-    screen.blit(label2, label2_rect)
-
-    for j in range(nb_lignes) :
-        for i in range(nb_btn):
-            size = ((screen_width - 850) / 2 + i* 150, posY, 100, 100)
-            pygame.draw.ellipse(screen, red, size, width = 0)
-            pygame.draw.ellipse(screen, black, size, width = 3)
-
-            if i > 4 :
-                posX = 100
-                posY += space_row
-                i -= 4
-                j +=1
-                break
-                
     pygame.display.flip()
-    clock.tick(60) 
-pygame.quit()
