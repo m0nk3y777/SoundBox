@@ -1,5 +1,7 @@
 import pygame
 from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,COLORS,TITLE,NB_COLS
+from data.file_loader import soundImporter
+
 
 def showMenu(screen,mouse,nb_buttons) : 
     font = pygame.font.SysFont("book antiqua",48)
@@ -50,6 +52,7 @@ def addSound(screen,mouse,nb_buttons) :
             soundAddBtnBorder = pygame.draw.rect(screen, BLUE,  ((LARGEUR-100 ) ,(HAUTEUR-100) ,40 ,40),border_radius = 20, width= 2)
             screen.blit(text, textpos)
             if click[0] == True and nb_buttons < 20 :
+                soundImporter()
                 nb_buttons += 1
                 print (nb_buttons)
                 return nb_buttons
