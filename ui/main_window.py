@@ -3,7 +3,7 @@ from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,COLO
 from data.file_loader import soundImporter
 
 
-def showMenu(screen,mouse,nb_buttons) : 
+def showMenu(screen,mouse,soundWbutton) : 
     font = pygame.font.SysFont("book antiqua",48)
     text = font.render(TITLE, 1,WHITE)
     textpos = text.get_rect()
@@ -15,7 +15,7 @@ def showMenu(screen,mouse,nb_buttons) :
     SPACEX = 0
     SPACEY = 0
 
-    for i in range (0,nb_buttons) :
+    for i in range (0,len(soundWbutton)) :
         soundBtn = pygame.draw.rect(screen, ORANGE, (X1+SPACEX , Y1+SPACEY ,80 ,80),border_radius = 35)
         fontBtn = pygame.font.SysFont("book antiqua", 12, bold=True)
         textSound = fontBtn.render("Sound",1,WHITE)
@@ -37,9 +37,10 @@ def showMenu(screen,mouse,nb_buttons) :
     pygame.display.flip()
     
 
-def addSound(screen,mouse,nb_buttons) : 
+def addSound(screen,mouse,soundWbutton) : 
 
     click = pygame.mouse.get_pressed()
+    n_id = len(soundWbutton)
 
     soundAddBtn = pygame.draw.rect(screen, GREEN, ((LARGEUR-100 ) ,(HAUTEUR-100) ,40 ,40),border_radius = 20)
     font = pygame.font.SysFont("Arial" ,32)
@@ -48,20 +49,22 @@ def addSound(screen,mouse,nb_buttons) :
     textpos.center = soundAddBtn.center
     screen.blit(text, textpos)
 
+    
+
     if soundAddBtn.collidepoint(mouse) :
             soundAddBtnBorder = pygame.draw.rect(screen, BLUE,  ((LARGEUR-100 ) ,(HAUTEUR-100) ,40 ,40),border_radius = 20, width= 2)
             screen.blit(text, textpos)
-            if click[0] == True and nb_buttons < 20 :
-                soundImporter()
-                nb_buttons += 1
-                print (nb_buttons)
-                return nb_buttons
-                
-    return nb_buttons
+            if click[0] == True and len(soundWbutton) < 20 :
+                filename = soundImporter()
+                if filename != "" :
+                    soundWbutton [n_id] = filename
+                    print (soundWbutton)
+                    return soundWbutton
+    return soundWbutton
 
     pygame.display.flip()
 
-def deleteSound(screen,mouse,nb_buttons) : 
+def deleteSound(screen,mouse,soundWbutton) : 
     soundDelBtn = pygame.draw.rect(screen, RED, ((LARGEUR-100 ) ,(HAUTEUR-150) ,40 ,40),border_radius = 20)
     font = pygame.font.SysFont("Arial" ,32)
     text = font.render("-", 1 ,WHITE)

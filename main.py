@@ -13,7 +13,7 @@ background = pygame.image.load("assets/bgsoundbox.jpg")
 background = pygame.transform.scale(background,(LARGEUR,HAUTEUR))
 screen.blit(background,(0,0))
 
-nb_buttons = 1
+soundWbutton = {}
 
 continuer = 1 
 while continuer : 
@@ -22,9 +22,9 @@ while continuer :
     mouse = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
-        showMenu(screen, mouse, nb_buttons)
-        nb_buttons = addSound(screen, mouse, nb_buttons)
-        deleteSound(screen, mouse, nb_buttons)
+        showMenu(screen, mouse, soundWbutton)
+        soundWbutton = addSound(screen, mouse, soundWbutton)
+        deleteSound(screen, mouse, soundWbutton)
         if event.type == QUIT :
             continuer = 0 
     pygame.display.flip()
