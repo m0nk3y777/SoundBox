@@ -1,9 +1,11 @@
 import pygame
 from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,COLORS,TITLE,NB_COLS
 from data.file_loader import soundImporter
+from ui.sound_button import playSound
 
 
 def showMenu(screen,mouse,soundWbutton) : 
+    click = pygame.mouse.get_pressed()
     font = pygame.font.SysFont("book antiqua",48)
     text = font.render(TITLE, 1,WHITE)
     textpos = text.get_rect()
@@ -26,6 +28,9 @@ def showMenu(screen,mouse,soundWbutton) :
         if soundBtn.collidepoint(mouse) :
             playBtn = pygame.draw.rect(screen, GREEN, (X1+SPACEX ,Y1+SPACEY ,80 ,80),border_radius = 35)
             playBtnBorder = pygame.draw.rect(screen, BLUE,  (X1+SPACEX ,Y1+SPACEY ,80 ,80),border_radius = 35, width = 2)
+
+            if click[0] == True :
+                playSound(soundWbutton,i)
             screen.blit(textSound,textSoundPos)
         SPACEX += LARGEUR/5
 
