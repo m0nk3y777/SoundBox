@@ -1,5 +1,5 @@
 import pygame
-from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,COLORS,TITLE,NB_COLS
+from data.config_manager import LARGEUR,HAUTEUR,BLUE,RED,WHITE,ORANGE,GREEN,PURPLE,COLORS,TITLE,NB_COLS
 from data.file_loader import soundImporter
 from ui.sound_button import playSound
 
@@ -81,4 +81,13 @@ def deleteSound(screen,mouse,soundWbutton) :
             soundAddBtnBorder = pygame.draw.rect(screen, BLUE,  ((LARGEUR-100 ) ,(HAUTEUR-150) ,40 ,40),border_radius = 20, width = 2)
             screen.blit(text, textpos)
 
+    pygame.display.flip()
+
+def stopBtn(screen,mouse,soundWbutton) : 
+    click = pygame.mouse.get_pressed()
+    stopBtn = pygame.draw.rect(screen, PURPLE,  ((LARGEUR-100 ) ,(HAUTEUR-50) ,40 ,40))
+    if stopBtn.collidepoint(mouse) :
+            stopBtnBorder = pygame.draw.rect(screen, BLUE,  ((LARGEUR-100 ) ,(HAUTEUR-50) ,40 ,40),width = 2)
+    if stopBtn.collidepoint(mouse) and click[0] == True :
+        pygame.mixer.stop()
     pygame.display.flip()

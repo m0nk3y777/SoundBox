@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import QUIT
-from ui.main_window import showMenu, addSound, deleteSound
+from ui.main_window import showMenu, addSound, deleteSound, stopBtn
 from data.config_manager import LARGEUR,HAUTEUR
 
 pygame.init()
@@ -25,6 +25,7 @@ while continuer :
         showMenu(screen, mouse, soundWbutton)
         soundWbutton = addSound(screen, mouse, soundWbutton)
         deleteSound(screen, mouse, soundWbutton)
+        stopBtn(screen,mouse,soundWbutton)
         if event.type == QUIT :
             continuer = 0 
     pygame.display.flip()
